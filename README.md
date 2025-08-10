@@ -187,6 +187,10 @@ tensorboard --logdir runs/ctm/ctm_k80_v10000_e50_b128/tb
 
 MIT
 
+### Project Links
+
+- PyPI: https://pypi.org/project/ctm-pytorch-advi/
+
 ### References
 
 - Blei, D. M., & Lafferty, J. D. (2006). Correlated Topic Models.

@@ -95,11 +95,10 @@ def main(cfg: TrainConfig = tyro.cli(TrainConfig)):
         ]
     )
 
-    # Run directory (resolve to absolute path so logs are consistent regardless of CWD)
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    # Run directory (resolve relative paths under the current working directory)
     ckpt_base = cfg.ckpt_dir
     if not os.path.isabs(ckpt_base):
-        ckpt_base = os.path.join(project_root, ckpt_base)
+        ckpt_base = os.path.abspath(os.path.join(os.getcwd(), ckpt_base))
     run_dir = os.path.join(
         ckpt_base,
         f"ctm_k{cfg.num_topics}_v{cfg.vocab_size}_e{cfg.epochs}_b{cfg.batch_size}",
