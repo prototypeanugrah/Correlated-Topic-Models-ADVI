@@ -13,10 +13,38 @@ CTM extends LDA by replacing the Dirichlet prior over document-topic proportions
 - TensorBoard logging and optional metrics plot export
 - Reproducible training with saved configs and exact vocabulary for deterministic inference
 
+### Project Structure
+
+```
+src/ctm/
+  __init__.py
+  config.py         # TrainConfig dataclass (CLI surface)
+  data.py           # 20NG loader + vectorization + DataLoaders
+  model.py          # CTM module + ELBO
+  train.py          # training loop, logging, checkpointing
+  infer.py          # top-words, coherence, perplexity
+  utils.py          # math and evaluation helpers
+src/scripts/
+  export_topics.py  # export top words to CSV from a checkpoint
+```
+
 ### Requirements
 
 - Python >= 3.10
-- Key dependencies (see `pyproject.toml`): `torch`, `numpy`, `scipy`, `scikit-learn`, `tqdm`, `tyro`, `rich`, `tensorboard`, `matplotlib`, `spacy`
+- Key dependencies (see `pyproject.toml`): 
+
+```
+torch
+numpy
+scipy
+scikit-learn
+tqdm
+tyro
+rich
+tensorboard
+matplotlib
+spacy
+```
 
 If you enable lemmatization, install a spaCy model:
 
@@ -142,21 +170,6 @@ Enable with `--use-tensorboard True` and then run:
 
 ```bash
 tensorboard --logdir runs/ctm/ctm_k80_v10000_e50_b128/tb
-```
-
-### Project Structure
-
-```
-src/ctm/
-  __init__.py
-  config.py         # TrainConfig dataclass (CLI surface)
-  data.py           # 20NG loader + vectorization + DataLoaders
-  model.py          # CTM module + ELBO
-  train.py          # training loop, logging, checkpointing
-  infer.py          # top-words, coherence, perplexity
-  utils.py          # math and evaluation helpers
-src/scripts/
-  export_topics.py  # export top words to CSV from a checkpoint
 ```
 
 ### Reproducibility
